@@ -1,0 +1,188 @@
+{% extends "base/base.html" %}
+
+{% block title %} List Targeting {% endblock  %}
+{% block content %}
+
+    <section class="hero-section container">
+
+        <form action="">
+            <div class="row mt-2 p-3">
+                <div class="col-lg-6 p-3">
+
+                    <div class="bg-diff _psection01">
+                        <form>
+                            <div class="form-group mb-3">
+                            <label for="requestID">MRM Request ID</label>
+                            <input type="text" class="form-control" id="requestID" placeholder="123456">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="csvUpload">Upload CSV</label>
+                                <input type="file" class="form-control form-control-file" id="csvUpload" onchange="handleFile();">
+                                <span class="badge badge-success" style="color:black;" id="span_csvUpload"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="startDate">Start Date</label>
+                                <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="endDate">End Date</label>
+                                <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                            </div>
+                        
+                        </form>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 p-3">
+                    <div class="bg-diff">
+                        <div id="radio-container" class="row media-selection" >
+                            <p class="text-center">Media Selection </p>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-center">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radio__pdf" id="radio__pdf">
+                                        <label class="form-check-label" for="radio__pdf">
+                                            PDF
+                                        </label>
+                                    </div>
+                                </div>                           
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-center">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radio__billmessage" id="radio__billmessage">
+                                        <label class="form-check-label" for="radio__billmessage">
+                                            Bill Message
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-5" id="upload-section">
+                            <div class="col-12">
+                                <p class="text-center">Upload</p>
+                                <div class="media-selection">
+                                    <div class="form-group mb-3">
+                                        <label for="csvUpload">Printed PDF</label>
+                                        <input type="file" class="form-control form-control-file" id="csvUpload">
+                                    </div>   
+                                    
+                                    <div class="form-group mb-3">
+                                        <label for="csvUpload">EBill PDF</label>
+                                        <input type="file" class="form-control form-control-file" id="csvUpload">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5" id="bill-message">
+                            <div class="col-12">
+                                <p class="text-center">Bill Message</p>
+                                <div class="media-selection">
+                                    <div class="form-group mb-3">
+                                        <textarea class="form-control" placeholder="Enter bill message here" id="floatingTextarea" rows="4"></textarea>                               
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button class="me-3 custom-btn">Save</button>
+                <button class="me-3 custom-btn"> Submit</button>
+            </div>
+        </form>
+
+    </section>
+
+{% endblock  %}
+
+{% block extra_script %}
+
+<script>
+
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            format: 'mm-dd-yyyy',  // Set the desired format
+            autoclose: true
+        });
+    });
+
+            
+    function handleFile() {
+
+        console.log('handleFile called');
+        const input = document.getElementById('csvUpload');
+        const file = input.files[0];
+        const spanText = document.getElementById('span_csvUpload');
+
+        if (file) {
+            const fileName = file.name;
+            const fileType = fileName.split('.').pop().toLowerCase();
+
+            if (fileType === 'csv') {
+                // File is CSV, proceed with calculating the number of rows
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const content = e.target.result;
+                    const rows = content.split('\n').length;
+
+                    // Display the number of rows
+                    spanText.innerHTML = `${rows} customer accounts loaded successfully`;
+                };
+
+                reader.readAsText(file);
+            } else {
+                spanText.innerHTML = 'Please upload a CSV file.';
+            }
+        }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // Get radio buttons and sections
+        const pdfRadio = document.getElementById('radio__pdf');
+        const billMessageRadio = document.getElementById('radio__billmessage');
+        const uploadSection = document.getElementById('upload-section');
+        const billMessageSection = document.getElementById('bill-message');
+        billMessageSection.style.display = 'none';
+        pdfRadio.checked = true
+
+        // Function to show/hide sections based on radio selection
+        function handleRadioSelection() {
+            if (pdfRadio.checked) {
+                uploadSection.style.display = 'block';
+                billMessageSection.style.display = 'none';
+            } else if (billMessageRadio.checked) {
+                uploadSection.style.display = 'none';
+                billMessageSection.style.display = 'block';
+            }
+        }
+
+        // Function to handle radio button click and validate only one radio is checked
+        function handleRadioClick(event) {
+            if (event.target.type === 'radio') {
+                pdfRadio.checked = (event.target.id === 'radio__pdf');
+                billMessageRadio.checked = (event.target.id === 'radio__billmessage');
+                handleRadioSelection();
+            }
+        }
+
+        // Attach event listeners to radio buttons
+        pdfRadio.addEventListener('change', handleRadioSelection);
+        billMessageRadio.addEventListener('change', handleRadioSelection);
+
+        // Attach event listener to container to handle radio button clicks and validate only one is checked
+        document.getElementById('radio-container').addEventListener('click', handleRadioClick);
+    });
+</script>
+
+{% endblock  %}

@@ -1,0 +1,29 @@
+{% extends "base/base.html" %}
+
+
+{% block title %} HOME {% endblock  %}
+
+{% block content %}
+
+    <section class="hero-section d-flex justify-content-center align-items-center home-container" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-12 mx-auto">
+                    <h1 class="text-black text-center">Message Request Manager</h1>
+
+                    <form method="get" class="custom-form mt-4 pt-3 mb-lg-0 mb-5" role="search">
+                        <div class="input-group input-group-lg p30">
+                            <input name="request_id" type="search" class="form-control text-center" id="keyword" placeholder="Search By Request Id" aria-label="Search">
+                            <button type="submit" class="custom-btn">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>            
+            <div class="mt-4 d-flex justify-content-center">
+                <a class="me-3 custom-btn" href="{% url "list_targeting:list_targeting" %}">List Targeting</a>
+                <a class="custom-btn" href="{% url "list_targeting:criteria_targeting" %}">Criteria Targeting</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

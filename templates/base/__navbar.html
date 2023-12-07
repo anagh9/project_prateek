@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <div class="logo">
+                MRM
+            </div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse nav-mr-0" id="navbarNav">
+            
+            <ul class="navbar-nav ms-lg-5">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "list_targeting:index" %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "list_targeting:list_targeting" %}">List Targeting</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "list_targeting:criteria_targeting" %}">Criteria Targeting</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
