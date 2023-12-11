@@ -405,6 +405,9 @@ img {
 }
 
 #searchbarsection{
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  margin-right: 10px;
   cursor: pointer;
 }
 
