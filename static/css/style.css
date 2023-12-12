@@ -411,6 +411,11 @@ img {
   cursor: pointer;
 }
 
+.media-selection-2{
+  height: 225px;
+}
+
+
 @media screen and (max-width: 991px) {
   h1 {
     font-size: 32px;

@@ -32,3 +32,13 @@
     </section>
 
 {% endblock %}
+
+{% block extra_script %}
+<script>
+    $(document).ready(function(){
+        // Add active class to the first nav-link
+        $(".navbar-nav .nav-item:first-child .nav-link").addClass("active");
+    });
+</script>
+
+{% endblock  %}

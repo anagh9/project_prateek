@@ -4,3 +4,12 @@
 {% block content %}
 
 {% endblock  %}
+
+{% block extra_script %}
+<script>
+    $(document).ready(function(){
+        $(".navbar-nav .nav-item:nth-child(3) .nav-link").addClass("active");
+    });
+</script>
+
+{% endblock  %}
