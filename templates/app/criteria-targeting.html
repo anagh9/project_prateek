@@ -1,14 +1,499 @@
 {% extends "base/base.html" %}
 
 {% block title %} Criteria Targeting {% endblock  %}
-{% block content %}
 
+{% block extra_style %}
+<style>
+.bg-diff{
+    height:100% !important;
+} 
+
+._psection01{
+    height:100% !important;
+}
+</style>
 {% endblock  %}
 
+{% block content %}
+
+
+{% comment %} Transcode Modal {% endcomment %}
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Transcodes</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <textarea class="form-control" name="transcodes" id="" cols="30" rows="10" placeholder="Enter Transcode or a list of transcodes seperated by comma."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+</div>
+{% comment %} Transcode Modal {% endcomment %}
+
+{% comment %} Zipcode Modal {% endcomment %}
+<div class="modal fade" id="zipcodeModel" aria-hidden="true" aria-labelledby="zipcodeModelToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Zip Codes</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <textarea class="form-control" name="transcodes" id="" cols="30" rows="10" placeholder="Enter Zipcode or a list of Zipcodes seperated by comma."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% comment %} Zipcode Modal {% endcomment %}
+
+{% comment %} State Modal {% endcomment %}
+<div class="modal fade" id="stateModel" aria-hidden="true" aria-labelledby="stateModelToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">State List</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <textarea class="form-control" name="transcodes" id="" cols="30" rows="10" placeholder="Enter state or a list of states seperated by comma."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% comment %} State Modal {% endcomment %}
+
+{% comment %} Bussiness Modal  {% endcomment %}
+<div class="modal fade" id="bussinessModel" aria-hidden="true" aria-labelledby="bussinessModelToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        <div class="modal-body">
+            <div class="form-group mb-3">
+                <label for="requestID">Bussiness Office List</label>
+                <select class="form-select" multiple aria-label="multiple select example">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="requestID">Exchange List</label>
+                <select class="form-select" multiple aria-label="multiple select example">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>  
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% comment %} Bussiness Modal  {% endcomment %}
+
+    
+    <section class="hero-section container">
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Transcode Modal Trigger</button>
+        <button class="btn btn-primary" data-bs-target="#zipcodeModel" data-bs-toggle="modal">Zipcode Modal Trigger</button>
+        <button class="btn btn-primary" data-bs-target="#stateModel" data-bs-toggle="modal">State Modal Trigger</button>
+        <button class="btn btn-primary" data-bs-target="#bussinessModel" data-bs-toggle="modal">Bussiness Modal Trigger</button>
+        <form action="">
+            <div class="row mt-2 p-3">
+                <h3 class="text-center">Criteria Targeting</h3>
+                <div class="col-lg-6 p-3">
+
+                    <div class="bg-diff _psection01">
+                        <form action="">
+
+                            <div class="form-group mb-3">
+                                <label for="requestID">MRM Request ID</label>
+                                <input type="text" class="form-control" id="requestID" placeholder="123456">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="startDate">Start Date</label>
+                                <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="endDate">End Date</label>
+                                <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                            </div>
+
+                            <div id="radio-container" class="row mb-2" >
+                                <label for="media_selection" class="mb-2">Media Selection</label>
+                                <div class="col-6">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radio__pdf" id="radio__pdf">
+                                        <label class="form-check-label" for="radio__pdf">
+                                            PDF
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radio__billmessage" id="radio__billmessage">
+                                        <label class="form-check-label" for="radio__billmessage">
+                                            Bill Message
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div id="upload-section">
+    
+                                    <div class="col-12">
+                                        <div class="media-selection media-selection-2">
+                                            <p class="text-center">Upload</p>
+                                            <div class="form-group mb-2">
+                                                <label for="csvUpload">Printed PDF</label>
+                                                <input type="file" class="form-control form-control-file" id="csvUpload">
+                                            </div>   
+                                            
+                                            <div class="form-group mb-2">
+                                                <label for="csvUpload">EBill PDF</label>
+                                                <input type="file" class="form-control form-control-file" id="csvUpload">
+                                            </div>
+    
+                                        </div>
+                                    </div>
+                                </div>
+    
+                            </div>
+    
+                            <div class="row">
+                                <div id="bill-message">                            
+                                    <div class="col-12">
+                                        <div class="media-selection media-selection-2">
+                                            <p class="text-center">Bill Message</p>
+                                            <div class="form-group mb-2">
+                                                <label for=""></label>
+                                                <textarea class="form-control" placeholder="Enter bill message here" rows=4></textarea>                               
+                                            </div>   
+                                            <div class="form-group mb-2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </form>
+                   
+                    </div>
+
+                </div>
+                <div class="col-lg-6 p-3">
+                    <div class="bg-diff">
+                        <div class="form-group mb-3">
+                            <label for="requestID">Business Segment</label>
+                            <select class="form-select" multiple aria-label="multiple select example">
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Customer Type</label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="both" name="both" class="custom-control-input">
+                                            <label class="custom-control-label" for="both">Both</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="residential" name="residential" class="custom-control-input">
+                                            <label class="custom-control-label" for="residential">Residential</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="commercial" name="commercial" class="custom-control-input">
+                                            <label class="custom-control-label" for="commercial">Commercial</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Location</label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="location_all" name="location_all" class="custom-control-input">
+                                            <label class="custom-control-label" for="location_all">All</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="location_office" name="location_office" class="custom-control-input">
+                                            <label class="custom-control-label" for="location_office">Office</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="location_zipcode" name="location_zipcode" class="custom-control-input">
+                                            <label class="custom-control-label" for="location_zipcode">Zip Code</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="location_state" name="location_state" class="custom-control-input">
+                                            <label class="custom-control-label" for="location_state">State</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Transcode</label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="transcode_both" name="transcode_both" class="custom-control-input">
+                                            <label class="custom-control-label" for="transcode_both">Both</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="transcode_include" name="transcode_include" class="custom-control-input">
+                                            <label class="custom-control-label" for="transcode_include">Include</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="transcode_exclude" name="transcode_exclude" class="custom-control-input">
+                                            <label class="custom-control-label" for="transcode_exclude">Exclude</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                           
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Competitive Areas</label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="competitive_both" name="competitive_both" class="custom-control-input">
+                                            <label class="custom-control-label" for="competitive_both">Both</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="competitive_hca" name="competitive_hca" class="custom-control-input">
+                                            <label class="custom-control-label" for="competitive_hca">HCA</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="competitive_nonhca" name="competitive_nonhca" class="custom-control-input">
+                                            <label class="custom-control-label" for="competitive_nonhca">Non HCA</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                      
+                        <div class="form-group mb-3">
+                            <label>Bill Media Indicator</label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="bill_media_indicator_both" name="bill_media_indicator_both" class="custom-control-input">
+                                            <label class="custom-control-label" for="bill_media_indicator_both">Both</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="bill_media_indicator_online" name="bill_media_indicator_online" class="custom-control-input">
+                                            <label class="custom-control-label" for="bill_media_indicator_online">Online Bill</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="bill_media_indicator_paperbill" name="bill_media_indicator_paperbill" class="custom-control-input">
+                                            <label class="custom-control-label" for="bill_media_indicator_paperbill">Paper Bill</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="requestID">Billing Period</label>
+                            {% comment %} <input type="text" class="form-control" id="requestID" placeholder="123456"> {% endcomment %}
+                            <select class="form-select" multiple aria-label="multiple select example">
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Billing Amount Status</label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="billing_amount_both" name="billing_amount_both" class="custom-control-input">
+                                            <label class="custom-control-label" for="billing_amount_both">Both</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="billing_amount_active" name="billing_amount_active" class="custom-control-input">
+                                            <label class="custom-control-label" for="billing_amount_active">Active</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="billing_amount_final" name="billing_amount_final" class="custom-control-input">
+                                            <label class="custom-control-label" for="billing_amount_final">Final</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button class="me-3 custom-btn">Save</button>
+                <button class="me-3 custom-btn"> Submit</button>
+            </div>
+        </form>
+
+    </section>
+
+{% endblock  %}
 {% block extra_script %}
 <script>
-    $(document).ready(function(){
+
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            format: 'mm-dd-yyyy',  // Set the desired format
+            autoclose: true
+        });
         $(".navbar-nav .nav-item:nth-child(3) .nav-link").addClass("active");
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // Get radio buttons and sections
+        const pdfRadio = document.getElementById('radio__pdf');
+        const billMessageRadio = document.getElementById('radio__billmessage');
+        const uploadSection = document.getElementById('upload-section');
+        const billMessageSection = document.getElementById('bill-message');
+        billMessageSection.style.display = 'none';
+        pdfRadio.checked = true
+
+        // Function to show/hide sections based on radio selection
+        function handleRadioSelection() {
+            if (pdfRadio.checked) {
+                uploadSection.style.display = 'block';
+                billMessageSection.style.display = 'none';
+            } else if (billMessageRadio.checked) {
+                uploadSection.style.display = 'none';
+                billMessageSection.style.display = 'block';
+            }
+        }
+
+        // Function to handle radio button click and validate only one radio is checked
+        function handleRadioClick(event) {
+            if (event.target.type === 'radio') {
+                pdfRadio.checked = (event.target.id === 'radio__pdf');
+                billMessageRadio.checked = (event.target.id === 'radio__billmessage');
+                handleRadioSelection();
+            }
+        }
+
+        // Attach event listeners to radio buttons
+        pdfRadio.addEventListener('change', handleRadioSelection);
+        billMessageRadio.addEventListener('change', handleRadioSelection);
+
+        // Attach event listener to container to handle radio button clicks and validate only one is checked
+        document.getElementById('radio-container').addEventListener('click', handleRadioClick);
     });
 </script>
 
