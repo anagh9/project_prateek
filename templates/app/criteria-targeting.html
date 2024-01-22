@@ -81,7 +81,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <textarea class="form-control" name="transcodes" id="" cols="30" rows="10" placeholder="Enter state or a list of states seperated by comma."></textarea>
+            <select class="form-select" multiple id="state_select" aria-label="multiple select example">
+                <option value="all">All</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" data-bs-dismiss="modal">Save</button>
@@ -215,7 +220,8 @@
                     <div class="bg-diff">
                         <div class="form-group mb-3">
                             <label for="requestID">Business Segment</label>
-                            <select class="form-select" multiple aria-label="multiple select example">
+                            <select class="form-select" multiple id="business_segment_select" aria-label="multiple select example">
+                                <option value="all">All</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
@@ -257,10 +263,24 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group mb-3">
+                            <label>Line of service</label>
+                            <div class="row">
+                                <div class="col-12">
+                                    <select class="form-select" multiple id="lineofservice_select" aria-label="multiple select example">
+                                        <option value="all">All</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group mb-3">
                             <label>Location</label>
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="location_all" name="location" class="custom-control-input">
@@ -268,15 +288,15 @@
                                         </div>
                                     </div>    
                                 </div>
-                                <div class="col-3">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="location_office" name="location" class="custom-control-input">
-                                            <label class="custom-control-label" for="location_office">Office</label>
+                                            <label class="custom-control-label" for="location_office">Business Office</label>
                                         </div>
                                     </div>    
                                 </div>
-                                <div class="col-3">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="location_zipcode" name="location" class="custom-control-input">
@@ -284,7 +304,7 @@
                                         </div>
                                     </div>    
                                 </div>
-                                <div class="col-3">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="location_state" name="location" class="custom-control-input">
@@ -331,6 +351,27 @@
                             </div>
                         </div>
                         <div class="form-group mb-3">
+                            <label>Delinquent Status</label>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="pastduenotice_1" name="delinquent_status" class="custom-control-input">
+                                            <label class="custom-control-label" for="pastduenotice_1">Past Due Notice</label>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="notice_of_future_2" name="delinquent_status" class="custom-control-input">
+                                            <label class="custom-control-label" for="notice_of_future_2"> Notice of Future (Suspend/ Disconnect) </label>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
                             <label>Competitive Areas</label>
                             <div class="row">
                                 <div class="col-3">
@@ -341,11 +382,11 @@
                                         </div>
                                     </div>    
                                 </div>
-                                <div class="col-3">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="competitive_hca" name="competitive" class="custom-control-input">
-                                            <label class="custom-control-label" for="competitive_hca">HCA</label>
+                                            <label class="custom-control-label" for="competitive_hca"> Highly Competitive Area </label>
                                         </div>
                                     </div>    
                                 </div>
@@ -354,12 +395,6 @@
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="competitive_nonhca" name="competitive" class="custom-control-input">
                                             <label class="custom-control-label" for="competitive_nonhca">Non HCA</label>
-                                        </div>
-                                    </div>    
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <div class="custom-control custom-radio">
                                         </div>
                                     </div>    
                                 </div>
@@ -404,7 +439,8 @@
                         <div class="form-group mb-3">
                             <label for="requestID">Billing Period</label>
                             {% comment %} <input type="text" class="form-control" id="requestID" placeholder="123456"> {% endcomment %}
-                            <select class="form-select" multiple aria-label="multiple select example">
+                            <select class="form-select" multiple id="billing_period_select" aria-label="multiple select example">
+                                <option value="all">All</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
@@ -502,7 +538,31 @@
               $('#bothtranscodeModal').modal('show');
             }
           });
+
+
+        document.getElementById('billing_period_select').addEventListener('change', function () {
+            handleSelectChange('billing_period_select');
+        });
+        
+        document.getElementById('business_segment_select').addEventListener('change', function () {
+            handleSelectChange('business_segment_select');
+        });
+        document.getElementById('state_select').addEventListener('change', function () {
+            handleSelectChange('state_select');
+        });
     });
+
+    function handleSelectChange(selectId) {
+        var select = document.getElementById(selectId);
+    
+        if (select.value === 'all') {
+            for (var i = 0; i < select.options.length; i++) {
+                select.options[i].selected = true;
+            }
+        } else {
+            select.options[0].selected = false;
+        }
+    }
 
     document.addEventListener('DOMContentLoaded', function () {
         
