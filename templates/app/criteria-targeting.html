@@ -22,7 +22,23 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="transcodeModalToggleLabel">Transcodes</h1>
+          <h1 class="modal-title fs-5" id="transcodeModalToggleLabel">Include Transcodes</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <textarea class="form-control" name="transcodes" id="" cols="30" rows="10" placeholder="Enter Transcode or a list of transcodes seperated by comma."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="transcodeModal2" aria-hidden="true" aria-labelledby="transcodeModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="transcodeModalToggleLabel">Exclude Transcodes</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -38,11 +54,12 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="transcodeModalToggleLabel">Transcodes</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+            <h1 class="modal-title fs-5 mb-1" id="transcodeModalToggleLabel">Include Transcodes</h1>
             <textarea class="form-control mb-2" name="include-transcodes" id="" cols="20" rows="5" placeholder="Enter Transcode or a list of transcodes to include seperated by comma."></textarea>
+            <h1 class="modal-title fs-5 mb-1" id="transcodeModalToggleLabel">Exclude Transcodes</h1> 
             <textarea class="form-control" name="exclude-transcodes" id="" cols="20" rows="5" placeholder="Enter Transcode or a list of transcodes to exclude seperated by comma."></textarea>
         </div>
         <div class="modal-footer">
@@ -140,7 +157,7 @@
                         <form action="">
 
                             <div class="form-group mb-3">
-                                <label for="requestID">MRM Request ID</label>
+                                <label for="requestID" title="Please Enter Robohead Project Number as MRM Request Id">MRM Request ID</label>
                                 <input type="text" class="form-control" id="requestID" placeholder="123456">
                             </div>
                             <div class="form-group mb-3">
@@ -515,7 +532,7 @@
           });
         $('#transcode_exclude').change(function(){
             if ($(this).is(':checked')) {
-              $('#transcodeModal').modal('show');
+              $('#transcodeModal2').modal('show');
             }
           });
         $('#location_zipcode').change(function(){
