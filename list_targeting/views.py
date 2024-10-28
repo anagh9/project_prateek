@@ -102,6 +102,27 @@ def list_targeting(request):
             }
             print("#65", response)
 
+        elif request.POST.get('action')  == 'delete':
+            message = "Request is deleted successfully"
+            messages.success(request, message)
+
+            response = {
+                "message_id": request_id,
+                "message_format":  "MESSAGE",
+                "target_format": "LIST",
+                "category_ind": customer_type,
+                # "start_date": datetime.strptime(start_date, "%d-%m-%Y"),
+                # "end_date": datetime.strptime(end_date, "%d-%m-%Y"),
+                "start_date": start_date,
+                "end_date": end_date,
+                "status_ind": "DELETE",
+                "priority_ind": 1,
+                # Populate the cust_ids by extracting from the csv file,
+                "cust_bill_acc_id_list": first_column_data,
+                "message_text": bill_message
+            }
+            print("#65", response)
+
         return redirect('list_targeting:list_targeting', message=message)
 
     return render(request, 'app/list-targeting.html')
